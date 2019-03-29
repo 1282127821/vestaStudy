@@ -2,6 +2,8 @@ package com.xy.springboot3.service;
 
 import com.robert.vesta.service.bean.Id;
 import com.robert.vesta.service.intf.IdService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -19,6 +21,7 @@ public class UidService {
     private IdService idService;
 
     public long genId() {
+    System.out.println(idService.getClass());
         return idService.genId();
     }
 
