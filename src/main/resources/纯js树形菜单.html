@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery-3.4.1.js"></script>
+    <script>
+        //------------这里面的知识和这个js树形菜单无关只是为了验证如何定义js里面的对象
+        //其实这就是js里面的对象
+        var person = {
+            firstName: "Bill",
+            lastName : "Gates",
+            id       : 678,
+            fullName : function() {
+                return this.firstName + " " + this.lastName;
+            }
+        };
+        alert(person.fullName());
+        //---------------------------------------------
+
+        function renderMenu(menu, parent) {
+            var el = $('<a href="#">' + menu.name + '</a>');
+            parent.append(el);
+            //之所以hasOwnProperty这个可以判断json里面是否有contents这个属性，就是json对象你完全可以按照java
+            //里面的对象去理解 属性-属性值
+            if (!menu.hasOwnProperty("contents")) { //判断是否是叶子节点，根据自己的数据去判断
+                return parent;
+            }
+
+
+            var ul = $('<ul/>');
+            for (var i = 0; i < menu.contents.length; ++i) {
+                var li = $('<li/>');
+                renderMenu(menu.contents[i], li);
+                ul.append(li);
+            }
+            parent.append(ul);
+            return parent;
+        }
+
+        function render(data) {
+            var div = $('<div/>');
+            return renderMenu(data, div);
+        }
+
+        $(function () {
+            var data = {
+                "type": "directory",
+                "name": "haha",
+                "contents": [{"type": "file", "name": "2848"}, {
+                    "type": "directory",
+                    "name": "_2848.extracted",
+                    "contents": [{"type": "file", "name": "3A03FC.xz"}]
+                }]
+            }; //你自己的json数据(这里不一定叫做json，因为在JavaScript里面对象就是这个样子的参照 http://www.w3school.com.cn/js/js_objects.asp)
+            var menu = render(data);
+            $("#div").append(menu);
+            $("#div ul").css("display", "none");
+            $("#div a").on("click", function () {
+                $(this).next().toggle();
+            });
+        });
+    </script>
+</head>
+<body>
+<div id="div"></div>
+
+</body>
+</html>
