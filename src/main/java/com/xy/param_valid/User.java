@@ -1,7 +1,8 @@
 package com.xy.param_valid;
 
 
-import javax.validation.constraints.Max;
+import com.xy.param_valid.自定义校验注解.Xy;
+
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -9,6 +10,7 @@ public class User {
     @Min(value = 3,message = "最少3个")
     private int id;
     @NotNull(message = "不能为null")
+    @Xy
     private String name;
 
     private int age;
