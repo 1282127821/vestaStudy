@@ -15,11 +15,23 @@ public class User {
 
     private int age;
 
+    private int num;
+
+    public User() {
+    }
+
     public User(int id, String name, int age) {
         this.id = id;
         this.name = name;
         this.age = age;
     }
+    public User(int id, String name, int age,int num) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.num = num;
+    }
+
 
     public int getId() {
         return id;
@@ -43,5 +55,13 @@ public class User {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
     }
 }
