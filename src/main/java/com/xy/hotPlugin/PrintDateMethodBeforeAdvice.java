@@ -21,7 +21,7 @@ public class PrintDateMethodBeforeAdvice implements MethodBeforeAdvice {
     @Override
     public void before(Method method, Object[] args, Object target) throws Throwable {
         count(method);
-        System.out.println(String.format("方法%s执行次数%s",method.getName(),countMap.get(method.getName()) ));
+        System.out.println(String.format("方法%s执行次数%s0",method.getName(),countMap.get(method.getName()) ));
     }
 
     private void count(Method method) {

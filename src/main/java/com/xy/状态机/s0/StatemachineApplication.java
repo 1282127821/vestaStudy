@@ -1,0 +1,35 @@
+package com.xy.状态机.s0;
+
+
+import com.xy.状态机.Events;
+import com.xy.状态机.States;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.statemachine.StateMachine;
+import org.springframework.statemachine.config.EnableStateMachine;
+
+@SpringBootApplication
+@EnableStateMachine
+public class StatemachineApplication implements CommandLineRunner {
+    @Autowired
+    private final StateMachine<States, Events> stateMachine;
+
+    public static void main(String[] args) {
+        SpringApplication.run(StatemachineApplication.class, args);
+    }
+
+
+    public StatemachineApplication(StateMachine<States, Events> stateMachine) {
+        this.stateMachine = stateMachine;
+    }
+
+    @Override
+    public void run(String... args) {
+//        stateMachine.start();
+        stateMachine.sendEvent(Events.RETURN);
+        stateMachine.sendEvent(Events.BORROW);
+        stateMachine.stop();
+    }
+}

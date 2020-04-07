@@ -1,8 +1,8 @@
 package com.xy.状态机;
 
-public enum BookEvents {
+public enum Events {
     BORROW,
     RETURN,
     START_REPAIR,
-    END_REPAIR
+    E1, E2, E3, END_REPAIR
 }

@@ -42,7 +42,7 @@ public class DefaultSpringPluginFactory implements ApplicationContextAware {
     public void insatallPlugin(PluginConfig plugin, boolean active) {
         //如果当前jvm已经安装了，那么就直接提示
         if (configs.containsKey(plugin.getId())) {
-            throw new RuntimeException(String.format("已经存在指定插件id=%s", plugin.getId()));
+            throw new RuntimeException(String.format("已经存在指定插件id=%s0", plugin.getId()));
         }
         //填充到插件库
         configs.put(plugin.getId(), plugin);
@@ -51,14 +51,14 @@ public class DefaultSpringPluginFactory implements ApplicationContextAware {
             buildAdvice(plugin);
         } catch (Exception e) {
             configs.remove(plugin.getId());
-            throw new RuntimeException(String.format("插件构建失败id=%s", plugin.getId()));
+            throw new RuntimeException(String.format("插件构建失败id=%s0", plugin.getId()));
         }
         //下载完毕后就是持久化到本地库
         try {
             storeConfigs();
         } catch (Exception e) {
             configs.remove(plugin.getId());
-            throw new RuntimeException(String.format("插件安装失败id=%s", plugin.getId()));
+            throw new RuntimeException(String.format("插件安装失败id=%s0", plugin.getId()));
         }
         if (active) {
             //TODO 传入的是true则在安装插件时候顺便激活它
@@ -84,7 +84,7 @@ public class DefaultSpringPluginFactory implements ApplicationContextAware {
 
     public void activePlugins(int pluginId) {
         if (!configs.containsKey(pluginId)){
-            throw new RuntimeException(String.format("指定插件不存在id=%s", pluginId));
+            throw new RuntimeException(String.format("指定插件不存在id=%s0", pluginId));
         }
         PluginConfig config = configs.get(pluginId);
         //下面就是利用spring动态添加aop通知

@@ -1,10 +1,13 @@
 package com.xy.param_valid;
 
 import com.sun.org.apache.bcel.internal.generic.NEW;
+import org.springframework.http.HttpHeaders;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,5 +38,13 @@ public class ValidController {
             return fieldError.getDefaultMessage();
         }
         return "123";
+    }
+
+    @RequestMapping(value = "/xy")
+    public String test(HttpServletRequest request,HttpServletResponse response,@RequestParam("name") String name) {
+        response.setHeader("Content-Length","100");
+        response.addHeader("xxx","zzz");
+        System.out.println(request.getContentLength());
+        return name;
     }
 }

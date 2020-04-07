@@ -1,9 +1,10 @@
 package com.xy.状态机;
 
 
-public enum BookStates {
+public enum States {
     AVAILABLE,
     BORROWED,
-    IN_REPAIR
+    IN_REPAIR,
+    SI, S1, S3, S2
 }
 
