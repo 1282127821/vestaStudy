@@ -5,10 +5,13 @@
     <title>断点续传</title>
 </head>
 <body>
-<video controls="controls" autoplay='autoplay' controls='controls'>
-    <source src='"+path+"' type="video/mp4"/>
+<!--断点续传实现边播边放 其实主要是实现服务端，因为video本身就支持断点续传-->
+<!--标签含义都可以找到 poster表示第一帧的显示-->
+<video controls="controls" autoplay='autoplay' controls='controls' height="300" width="500"
+       poster="poster.jpg">
+    <source src="http://127.0.0.1:8080/getVedio" type="video/mp4"/>
     Your browser does not support the video tag.
 </video>
-<audio src='"+path+"' autoplay='autoplay' controls='controls' id='player'></audio>
+<!--<audio src='"+path+"' autoplay='autoplay' controls='controls' id='player'></audio>-->
 </body>
 </html>

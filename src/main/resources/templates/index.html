@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>下载展示进度</title>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+</head>
+<body>
+<!--<form action="http://localhost:8080/up" method="post" enctype="multipart/form-data">
+    文件名<input type="file" name="photo"/><br/>
+    <input type="text" name="desc"/> <br/>
+    <input type="submit" value="提交"/><br/>
+</form>-->
+<h3>童话镇.mp3 陈一发儿</h3>
+<a href="http://localhost:8080/download" onclick="start()">前去下载</a>
+<br/>
+<br/>
+已加载:<span id="show"></span><br/>
+<progress value="0" max="100" id="progress1">0</progress>
+
+<script>
+    var show = document.getElementById("show")
+    var progress1 = document.getElementById("progress1");
+
+    var interval;
+
+    function start0() {
+        $.post("http://localhost:8080/prog", function (data, status) {
+            if (data != null) {
+                var precent = data.progress / data.total;
+                var precentVal = precent.toFixed(2); // 保存小数点2位
+                progress1.value = precentVal * 100;//百分值
+                show.innerHTML = precentVal * 100 + "%";//百分值
+                if (data.progress >= data.total) {
+                    clearInterval(interval)
+                }
+            }
+        });
+
+    }
+
+    function start() {
+        interval = setInterval(start0, 500);
+    }
+</script>
+</body>
+
+</html>
