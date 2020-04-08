@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>提交表单自动添加token</title>
+</head>
+<body>
+<script>
+    window.onload=function (ev) {
+        post();
+    }
+    function post() {
+        // 创建一个标签，将标签添加到指定标签里面
+        var tag = document.createElement('input');
+        tag.setAttribute('type', 'hidden');
+        tag.setAttribute("name", "token");
+        tag.setAttribute("value", "123");
+        tag.style.fontSize = '19px';
+        tag.style.color = 'red';
+
+        //实现约定 token_form 这样的命名 会自动添加token 那么我们只要设置name="token_form"即可
+        //这样的话相当于给每一个name="token_form"添加一个隐藏域(我这里方便观察没有用他)然后就是token
+        var forms = document.getElementsByName("token_form");
+        for (var i = 0; i < forms.length; i++) {//没有可能有多个
+            var form = forms[i];
+            form.appendChild(tag);
+            // //注册监听函数 这个和这里没关系只是测试
+            form.addEventListener('submit',function(event){
+                form.submit();
+            },false);
+        }
+
+    }
+
+</script>
+<div>
+    <form name="token_form" action="http://www.baidu.com">
+        name： <input name="name" value="xy"/>
+        age： <input name="age" value="18"/>
+        <input type="submit" value="提交表单"/>
+    </form>
+</div>
+</body>
+</html>
