@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312"/>
+    <title>测试图片标记</title>
+    <style type="text/css">
+        #container {
+            position: relative;
+            width: 600px;
+            height: 710px;
+            border: 1px solid #CCC;
+            overflow: hidden;
+        }
+
+        #map {
+            position: absolute;
+        }
+
+        .mark {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            font-size: 0px;
+            background: #FF0000;
+        }
+
+        .label {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+        }
+    </style>
+    <script type="text/javascript">
+        var mark = [];
+        var xx = 0;
+        var yy = 0;
+
+        function setCookie(name, value) {
+            var Days = 365;
+            var exp = new Date();
+            exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
+            document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
+        }
+
+        function getCookie(name) {
+            var arr = document.cookie.match(new RegExp("(^| )" + name + "=([^;]*)(;|$)"));
+            if (arr != null) return unescape(arr[2]);
+            return null;
+
+        }
+
+        function delCookie(name) {
+            var exp = new Date();
+            exp.setTime(exp.getTime() - 1);
+            var cval = getCookie(name);
+            if (cval != null) document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
+        }
+
+        function $(id) {
+            return document.getElementById(id);
+        }
+
+        /*function point(x, y) {
+            this.x = x;
+            this.y = y;
+        }*/
+
+        function getOffset(obj) {
+            var x = 0, y = 0;
+            while (obj) {
+                x += obj.offsetLeft;
+                y += obj.offsetTop;
+
+                obj = obj.offsetParent;
+            }
+            return {x: x, y: y};
+        }
+
+        function addMark(p, x, y, val, index) {
+            var div = document.createElement("div");
+            div.id = "mark" + index;
+            div.className = "mark";
+            div.style.left = x + "px";
+            div.style.top = y + "px";
+            p.appendChild(div);
+
+            //前面不动在对应地方添加上文字
+            var label = document.createElement("label");
+            label.style.marginLeft = x + "px";
+            label.style.marginTop = y + "px";
+            label.id = "label" + index;
+            label.className = "label";
+            label.innerText = val;
+            p.appendChild(label);
+
+        }
+
+        function bindEvent() {
+            $("map").ondblclick = function (oEvent) {
+                oEvent = oEvent || event;
+                var container = $("container");
+                var offset = getOffset(container);
+                var x = oEvent.clientX - offset.x;
+                var y = oEvent.clientY - offset.y;
+                xx = x;
+                yy = y;
+                popInput(x, y);
+            };
+            $("inwriter").onchange = function (ev) {
+                var container = $("container");
+                var input = $("in");
+                var inwriter = $("inwriter");
+                var offset = getOffset(container);
+                var x = xx - offset.x;
+                var y = yy - offset.y;
+                var val = input.value;
+                if (val === null || val === "") {
+                    return
+                }
+
+                addMark(container, x, y, val, mark.length);
+                mark.push(x + "," + y + "," + val);
+                saveMark();
+                //隐藏输入框
+                inwriter.style.display = "none";
+                input.value = ""
+            }
+        }
+
+        function popInput(x, y) {
+            var write = $("inwriter");
+
+            write.style.marginLeft = x + "px";
+            write.style.marginTop = y + "px";
+
+            write.style.display = "block";
+        }
+
+        function saveMark() {
+            setCookie("mark", mark.join("|"));
+        }
+
+        function loadMark() {
+            var cookie = getCookie("mark");
+            if (cookie) {
+                mark = cookie.split("|");
+                var container = $("container");
+                for (var i = 0; i < mark.length; i++) {
+                    addMark(container, mark[i].split(",")[0], mark[i].split(",")[1], mark[i].split(",")[2], i);
+                }
+            }
+        }
+
+        function clearMark() {
+            var container = $("container");
+            for (var i = 0; i < mark.length; i++) {
+                container.removeChild($("mark" + i));
+                container.removeChild($("label" + i));
+            }
+            mark.length = 0;
+            saveMark();
+        }
+
+        window.onload = function () {
+            bindEvent();
+            loadMark();
+        };
+    </script>
+</head>
+
+<body>
+<div id="container">
+    <div id="map">
+        <!--position: absolute z-index: 100这两个主要是让同级别的div可以重叠为了输入框弹出做准备-->
+        <div class="wrap" style="position: absolute">
+            <img src="../static/1.jpg" alt=""><!--当前路径的父级 的static目录下的1.jpg-->
+        </div>
+        <div id="inwriter" style="position: absolute;z-index: 100;display: none">
+            <!--对输入框添加样式即可做到标注的那个留言框效果-->
+            <input id="in" type="text" value=""/>
+        </div>
+
+    </div>
+</div>
+<br/>
+<input type="button" value="清除标记" onclick="clearMark()"/>
+</body>
+</html>
+
