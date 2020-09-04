@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>手机竖屏横屏兼容</title>
+</head>
+<body>
+<script>
+    function rotate() {
+
+        //注意  window.orientation这个属性已经过期了(点进去有一个注解过期)，好不容易在百度上面搜索到
+        //screen.orientation.angle 这个angle是猜的，后面发现啊其实很简单angle角度 不正好对应90 180吗
+        //这个就是命名规范的好处
+
+        if (screen.orientation.type === "portrait-primary") {
+            console.log("竖屏")
+            alert("竖屏")
+        }
+        if (screen.orientation.type === "landscape-primary") {
+            console.log("横屏")
+            alert("横屏")
+        }
+    }
+
+    // window.addEventListener("load", rotate, false);
+    var evt = "onorientationchange" in window ? "orientationchange" : "resize";
+
+    window.addEventListener(evt, rotate, false);
+</script>
+<div style="width: 315px;height: 812px;background-color: aqua">手机</div>
+</body>
+</html>
