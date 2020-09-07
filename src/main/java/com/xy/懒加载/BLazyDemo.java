@@ -13,11 +13,11 @@ import javax.annotation.PostConstruct;
  * @description:
  */
 @Component
-@Lazy
+//@Lazy
 public class BLazyDemo {
     public int anInt = 0;
     @Autowired
-    private CLazyDemo cLazyDemo;
+    private ALazyDemo cLazyDemo;
 
 
     public BLazyDemo() {

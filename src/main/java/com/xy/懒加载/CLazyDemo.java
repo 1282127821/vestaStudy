@@ -1,5 +1,6 @@
 package com.xy.懒加载;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
@@ -11,14 +12,17 @@ import org.springframework.stereotype.Component;
  * @description:
  */
 @Component
-@Lazy
+//@Lazy
 public class CLazyDemo {
+    @Autowired
+    private ALazyDemo eLazyDemo;
+
     public CLazyDemo() {
         System.out.println("CLazyDemo加载");
     }
 
-    @Bean
-    @Lazy
+//    @Bean
+//    @Lazy
     public DLazyDemo getDLazyDemo() {
         System.out.println("DLazyDemo加载");
         return new DLazyDemo();
