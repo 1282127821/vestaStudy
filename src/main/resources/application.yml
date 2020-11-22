@@ -1,0 +1,14 @@
+#dev 9090 表示正常网站比如银行 stage9090表示危险网站
+#spring.profiles.active=dev
+server:
+  port: 8080
+spring:
+  profiles:
+    active: xxxdev
+  datasource:
+    update: 123
+    url: jdbc:mysql://localhost:3306/test
+    driver-class-name: com.mysql.jdbc.Driver
+    password: 123456
+    username: root
+

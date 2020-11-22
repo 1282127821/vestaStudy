@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax测试</title>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+</head>
+
+<body>
+<button id="but1">but1</button>
+<br>
+<button id="but2">but2</button>
+<script>
+    $("#but1").click(function () {
+        $.ajax({
+            url: "/say1", success: function (result) {
+                alert(result)
+            }
+        });
+    });
+    $("#but2").click(function () {
+        $.ajax({
+            url: "/say2", success: function (result) {
+                alert(result)
+            }
+        });
+    });
+</script>
+</body>
+</html>

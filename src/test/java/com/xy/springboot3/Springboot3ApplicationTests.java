@@ -1,5 +1,6 @@
 package com.xy.springboot3;
 
+import com.xy.切换数据库.MysqlDemo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
