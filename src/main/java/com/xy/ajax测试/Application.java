@@ -7,6 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.statemachine.config.EnableStateMachine;
 
+import java.net.Socket;
+
 @SpringBootApplication
 public class Application {
 

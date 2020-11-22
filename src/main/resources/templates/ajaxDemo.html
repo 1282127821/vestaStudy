@@ -7,20 +7,66 @@
 </head>
 
 <body>
-<button id="but1">but1</button>
+<button id="but1">but1</button><button id="but2">but2</button>
+<button id="but3">but3</button><button id="but4">but4</button>
+<button id="but5">but5</button><button id="but6">but6</button>
 <br>
-<button id="but2">but2</button>
+<button id="but7">but7</button>
+
 <script>
     $("#but1").click(function () {
         $.ajax({
+            async:true,
             url: "/say1", success: function (result) {
                 alert(result)
             }
         });
     });
+
     $("#but2").click(function () {
         $.ajax({
+            async:true,
             url: "/say2", success: function (result) {
+                alert(result)
+            }
+        });
+    });
+    $("#but3").click(function () {
+        $.ajax({
+            async:true,
+            url: "/say3", success: function (result) {
+                alert(result)
+            }
+        });
+    });
+    $("#but4").click(function () {
+        $.ajax({
+            async:true,
+            url: "/say4", success: function (result) {
+                alert(result)
+            }
+        });
+    });
+    $("#but5").click(function () {
+        $.ajax({
+            async:true,
+            url: "/say5", success: function (result) {
+                alert(result)
+            }
+        });
+    });
+    $("#but6").click(function () {
+        $.ajax({
+            async:true,
+            url: "/say6", success: function (result) {
+                alert(result)
+            }
+        });
+    });
+    $("#but7").click(function () {
+        $.ajax({
+            async:true,
+            url: "/say7", success: function (result) {
                 alert(result)
             }
         });
