@@ -6,12 +6,22 @@
     <script src="../static/jquery-3.4.1.js">
     </script>
     <script>
-        $(document).ready(function(){
-            $("button").click(function(){
-                $.ajax({url:"http://localhost:8080/login",success:function(result){
-                        $("#div1").html(result);
-                    }});
+        $(document).ready(function () {
+            $("button").click(function () {
+                $.ajax({
+                    url: "http://localhost:8080/login",
+                    type: "GET",
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    crossDomain: true,
+                    success: function (data) {
+                        $("#div1").html(data);
+                    }
+                });
             });
+
+
         });
     </script>
 </head>
