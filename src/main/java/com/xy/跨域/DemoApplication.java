@@ -1,5 +1,7 @@
 package com.xy.跨域;
 
+import com.sun.nio.zipfs.ZipPath;
+import jdk.nashorn.internal.codegen.Compiler;
 import org.springframework.beans.BeansException;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -19,6 +21,7 @@ public class DemoApplication implements  CommandLineRunner, ApplicationContextAw
 
     @Override
     public void run(String... args) throws Exception {
+        System.out.println("<<<<<"+ZipPath.class.getClassLoader());
     }
 
     @Override
